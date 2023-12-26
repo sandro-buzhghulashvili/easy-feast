@@ -1,0 +1,27 @@
+$primary-color-orange: #fe724c;
+$light-orange: #fed2c7;
+$primary-color-yellow: #ffc529;
+$typography-color: #1a1d26;
+$gray-color: #9a9fae;
+
+$font-weights: (
+  'regular': 400,
+  'medium': 500,
+  'bold': 700,
+);
+
+@function weight($weight) {
+  @return map-get($font-weights, $weight);
+}
+
+@mixin mobile {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin medium {
+  @media screen and (min-width: 800px) {
+    @content;
+  }
+}
