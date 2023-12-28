@@ -13,7 +13,7 @@ export default function Navbar() {
     setToggleNavbar((prevValue) => !prevValue);
   };
   return (
-    <div className='flex justify-between items-center py-8 px-8 sm:px-20 lg:px-56 mb-10'>
+    <div className='flex justify-between items-center py-8 px-8 sm:px-20 lg:px-56 mb-28'>
       <h1 className={classes.logo}>
         EASY <span>FEAST</span>
       </h1>
@@ -35,9 +35,8 @@ export default function Navbar() {
         {toggleNavBar ? <X /> : <Menu />}
       </span>
       <ul
-        className={`${classes["nav-links"]} ${
-          toggleNavBar ? classes.active : undefined
-        } flex flex-col items-center justify-center `}
+        className={`${classes["nav-links"]} ${toggleNavBar ? classes.active : undefined
+          } flex flex-col items-center justify-center `}
       >
         <li className='flex flex-col items-center p-10'>
           <img

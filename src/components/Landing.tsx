@@ -1,5 +1,5 @@
 import classes from "./Landing.module.scss";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 import { Phone, Play, Star } from "lucide-react";
 import cherryImg from "../assets/cherry.png";
@@ -14,12 +14,15 @@ import userEmoji from "../assets/user-emoji.png";
 import pizzaProfile from "../assets/pizza-profile.png";
 
 const Landing = () => {
+  const { scrollY } = useScroll()
+  const rotateClock = useTransform(scrollY, [0, 150, 300], [0, 90, 180])
+  const profilesOpacity = useTransform(scrollY, [0, 400, 600], [1, 0.7, 0.5])
   return (
     <motion.main
       initial={{ opacity: 0, y: 200 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.4, duration: 0.5 }}
-      className='flex flex-col-reverse lg:flex-row justify-between p-10 w-fit m-auto items-center container'
+      className='flex flex-col-reverse lg:flex-row justify-between p-10 w-fit m-auto items-center container mb-44'
     >
       <section className={`${classes.hero} lg:w-3/5`}>
         <span
@@ -70,8 +73,9 @@ const Landing = () => {
         </div>
       </section>
       <section className={classes["hero-img"]}>
-        <img
+        <motion.img
           src={clockIcon}
+          style={{ rotate: rotateClock }}
           alt='clock'
           className={`absolute top-0 left-0 ${classes["hero-icon"]}`}
         />
@@ -88,7 +92,8 @@ const Landing = () => {
         <div className={classes.ellipse}>
           <img src={heroImg} alt='hero' />
         </div>
-        <div
+        <motion.div
+          style={{ opacity: profilesOpacity }}
           className={`${classes["courier-profile"]} absolute -bottom-10 -left-10 md:left-10 md:bottom-10 flex items-center bg-white_color px-3 py-2 rounded-full shadow-md`}
         >
           <img src={userEmoji} className='mr-3' alt='user emoji' />
@@ -99,8 +104,9 @@ const Landing = () => {
           <span className='p-3 bg-primary_orange rounded-full'>
             <Phone className='w w-5 h-5 stroke-white_color' />
           </span>
-        </div>
-        <div
+        </motion.div>
+        <motion.div
+          style={{ opacity: profilesOpacity }}
           className={`flex absolute lg:-right-10 lg:-bottom-10 -bottom-5 right-16 bg-white_color px-3 py-2 rounded-lg shadow-md ${classes["pizza-profile"]}`}
         >
           <img src={pizzaProfile} alt='pizza profile' className='m mr-3' />
@@ -109,11 +115,10 @@ const Landing = () => {
             {Array.from({ length: 5 }).map((_, index) => {
               return (
                 <Star
-                  className={`inline-block stroke-none ${
-                    index === 4
-                      ? "stroke-primary_yellow"
-                      : "fill-primary_yellow"
-                  }`}
+                  className={`inline-block stroke-none ${index === 4
+                    ? "stroke-primary_yellow"
+                    : "fill-primary_yellow"
+                    }`}
                   key={index}
                 />
               );
@@ -122,7 +127,7 @@ const Landing = () => {
               <span className='text-primary_orange text-sm'>$</span>7.49
             </h2>
           </div>
-        </div>
+        </motion.div>
       </section>
     </motion.main>
   );

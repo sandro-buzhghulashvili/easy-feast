@@ -1,0 +1,22 @@
+@import '../scss/variables';
+
+.type-select {
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #fff;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $primary-color-orange;
+    border-radius: 30px;
+  }
+}
+
+.active {
+  background-color: $primary-color-orange;
+  p {
+    color: #fff;
+  }
+}
