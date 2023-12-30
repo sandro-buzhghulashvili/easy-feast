@@ -2,12 +2,13 @@ $primary-color-orange: #fe724c;
 $light-orange: #fed2c7;
 $primary-color-yellow: #ffc529;
 $typography-color: #1a1d26;
-$gray-color: #9a9fae;
+$gray-color: #e1e8fad8;
+$white_color: "#fff";
 
 $font-weights: (
-  'regular': 400,
-  'medium': 500,
-  'bold': 700,
+  "regular": 400,
+  "medium": 500,
+  "bold": 700,
 );
 
 @function weight($weight) {

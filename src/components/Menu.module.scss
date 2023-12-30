@@ -1,4 +1,4 @@
-@import '../scss/variables';
+@import "../scss/variables";
 
 .type-select {
   &::-webkit-scrollbar {
@@ -18,5 +18,86 @@
   background-color: $primary-color-orange;
   p {
     color: #fff;
+  }
+}
+
+.meal-card {
+  position: relative;
+  height: 223px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.3) 70%,
+      rgba(0, 0, 0, 0.5) 100%
+    );
+    border-radius: 24px;
+  }
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  h1,
+  p,
+  a {
+    position: relative;
+    z-index: 3;
+    color: #fff;
+  }
+}
+
+.slider-buttons {
+  button {
+    padding: 20px;
+    border-radius: 50%;
+    transition: 0.3s;
+
+    &:nth-of-type(1) {
+      margin-right: 40px;
+      background-color: $gray-color;
+    }
+    &:nth-of-type(2) {
+      background-color: $primary-color-orange;
+
+      * {
+        stroke: #fff;
+      }
+    }
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+@include mobile {
+  .slider-buttons {
+    display: none;
+  }
+}
+
+.food-container {
+  &::-webkit-scrollbar {
+    width: 30px;
+    height: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #fff;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $gray-color;
+    border-radius: 20px;
   }
 }
