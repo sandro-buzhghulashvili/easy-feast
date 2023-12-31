@@ -67,8 +67,6 @@ const Menu: React.FC = () => {
     }
   };
 
-  console.log(selectedType);
-
   return (
     <div className='container text-center py-3 px-5 mx-auto mb-40'>
       <div className='md:flex lg:px-16 justify-between items-center'>

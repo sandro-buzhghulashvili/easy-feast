@@ -4,13 +4,13 @@ import User from "../models/User";
 
 type userContextObject = {
   user: User | undefined;
-  login: (userConfig: any) => void;
+  login: (userObj: User) => void;
   logout: () => void;
 };
 
 export const userContext = React.createContext<userContextObject>({
   user: undefined,
-  login: () => {},
+  login: (userObj: User) => {},
   logout: () => {},
 });
 

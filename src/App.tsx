@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import LayoutPage from "./pages/Layout";
 import LandingPage from "./pages/Landing";
+import FormPage from "./pages/Form";
 
 const router = createBrowserRouter([
   {
@@ -11,6 +12,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <LandingPage />,
+      },
+      {
+        path: "form",
+        element: <FormPage />,
       },
     ],
   },
