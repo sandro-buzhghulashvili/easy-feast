@@ -114,9 +114,10 @@ const Menu: React.FC = () => {
         </div>
         <motion.div
           variants={{
-            hidden: { opacity: 0, y: 300 },
-            visible: { opacity: 1, y: 0 },
+            hidden: { opacity: 0 },
+            visible: { opacity: 1 },
           }}
+          transition={{ duration: 0.8 }}
           initial='hidden'
           whileInView='visible'
           className={`whitespace-nowrap overflow-x-auto py-3 md:overflow-x-hidden md:w-3/4 ${classes["food-container"]}`}

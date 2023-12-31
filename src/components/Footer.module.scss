@@ -1,0 +1,21 @@
+@import "../scss/variables";
+.container {
+  width: 100%;
+}
+.footer-section {
+  width: 300px;
+  padding: 0 30px;
+  margin-bottom: 40px;
+
+  h1 {
+    font-weight: weight(bold);
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  @include mobile {
+    text-align: center;
+    width: 100%;
+    margin-right: 0;
+  }
+}
