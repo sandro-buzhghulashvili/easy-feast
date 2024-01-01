@@ -1,0 +1,67 @@
+@import '../../scss/variables';
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+
+  &.invalid {
+    input {
+      border: 1px solid red;
+    }
+  }
+
+  &.choose-avatar {
+    cursor: pointer;
+    padding: 10px 20px;
+    border: 2px solid $primary-color-orange;
+    width: fit-content;
+    border-radius: 5px;
+    color: $primary-color-orange;
+    font-weight: weight(bold);
+  }
+
+  &.file {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+
+    input {
+      position: absolute;
+      font-size: 100px; /* Set a large font size to cover the button entirely */
+      opacity: 0;
+      right: 0;
+      top: 0;
+    }
+
+    .upload-img {
+      display: inline-block;
+      margin-top: 20px;
+      margin-right: 5px;
+      cursor: pointer;
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: $primary-color-orange;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+  }
+
+  label {
+    margin-bottom: 10px;
+  }
+
+  input {
+    border: 1px solid $gray-color;
+    font-size: 1.2rem;
+    padding: 6px 12px;
+    border-radius: 10px;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color-orange;
+    }
+  }
+}
