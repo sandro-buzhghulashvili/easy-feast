@@ -1,9 +1,15 @@
-@import "../scss/variables";
+@import '../scss/variables';
 
 .form-control {
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
+
+  &.invalid {
+    input {
+      border: 1px solid red;
+    }
+  }
 
   label {
     margin-bottom: 10px;
