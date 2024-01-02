@@ -6,7 +6,8 @@ import { userContext } from "../store/user-context";
 
 import { Menu, List, X, User, LocateIcon, Contact, Home } from "lucide-react";
 
-import profileImg from "../assets/temporary-icon.png";
+// import profileImg from "../assets/temporary-icon.png";
+import defaultProfileImg from "../assets/default-profile-img.png";
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
@@ -16,6 +17,8 @@ export default function Navbar() {
   const toggleNavbarHandler = (): void => {
     setToggleNavbar((prevValue) => !prevValue);
   };
+
+  console.log(ctx);
   return (
     <div className='flex justify-between items-center py-8 px-8 sm:px-20 lg:px-56 mb-28'>
       <Link to='../' className={classes.logo}>
@@ -43,15 +46,17 @@ export default function Navbar() {
           toggleNavBar ? classes.active : undefined
         } flex flex-col items-center justify-center `}
       >
-        <li className='flex flex-col items-center p-10'>
-          <img
-            src={profileImg}
-            alt='profile'
-            className='mb-5 rounded-full cursor-pointer'
-          />
-          <h1 className='mb-3 text-xl font-bold'>Farion Wick</h1>
-          <p className='text-gray-400'>farionwick@gmail.com</p>
-        </li>
+        {ctx.user && (
+          <li className='flex flex-col items-center p-10'>
+            <img
+              src={defaultProfileImg}
+              alt='profile'
+              className='mb-5 w-20 h-20 rounded-full cursor-pointer'
+            />
+            <h1 className='mb-3 text-xl font-bold'>{ctx.user.username}</h1>
+            <p className='text-gray-400'>{ctx.user.email}</p>
+          </li>
+        )}
         <li>
           <a href='#orders'>
             <Home className='mr-5' /> Home
