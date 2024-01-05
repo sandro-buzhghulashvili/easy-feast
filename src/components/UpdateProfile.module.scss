@@ -1,0 +1,26 @@
+@import '../scss/variables';
+
+.invalid {
+  input {
+    border: 2px solid red;
+  }
+}
+
+.avatars {
+  &::-webkit-scrollbar {
+    width: 7px;
+    height: 3px;
+
+    @include medium {
+      width: 10px;
+      height: 10px;
+    }
+  }
+  &::-webkit-scrollbar-track {
+    background-color: #fff;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $primary-color-orange;
+    border-radius: 30px;
+  }
+}

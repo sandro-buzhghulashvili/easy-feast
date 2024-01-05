@@ -1,0 +1,42 @@
+@import '../../scss/variables';
+
+.loader {
+  position: absolute;
+  animation: outerLoader 4s ease-in-out infinite forwards alternate-reverse;
+
+  div {
+    height: 0%;
+    background-color: $primary-color-orange;
+    animation: loadingInner 4s ease-in-out infinite alternate-reverse;
+  }
+
+  @keyframes loadingInner {
+    25% {
+      height: 100%;
+    }
+    50% {
+      height: 0%;
+    }
+    75% {
+      height: 100%;
+    }
+    100% {
+      height: 0%;
+    }
+  }
+}
+
+@keyframes outerLoader {
+  25% {
+    transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
