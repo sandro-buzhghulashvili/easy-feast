@@ -24,3 +24,7 @@
     border-radius: 30px;
   }
 }
+
+.active {
+  border: 2px solid $primary-color-orange !important;
+}

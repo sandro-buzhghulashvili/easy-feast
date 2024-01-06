@@ -54,26 +54,41 @@ const ProfileComponent: React.FC = () => {
 
   const updateUser = async (id: string, newUser: any) => {
     try {
-      const res = await fetch(
-        `https://easy-feast-default-rtdb.firebaseio.com/users/${id}.json`,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(newUser),
-        }
+      const usersData = await fetch(
+        'https://easy-feast-default-rtdb.firebaseio.com/users.json'
+      );
+      const users: any[] = Object.values(await usersData.json());
+      const userExists = users.find(
+        (user) => user.username === newUser.username && user.id !== newUser.id
       );
 
-      if (!res.ok) {
-        throw new Error();
-      }
+      if (!userExists) {
+        const res = await fetch(
+          `https://easy-feast-default-rtdb.firebaseio.com/users/${id}.json`,
+          {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newUser),
+          }
+        );
 
-      ctx.login(newUser);
-      ctx.applyFlashMessage({
-        status: 'success',
-        message: 'Successfully updated user',
-      });
+        if (!res.ok) {
+          throw new Error();
+        }
+
+        ctx.login(newUser);
+        ctx.applyFlashMessage({
+          status: 'success',
+          message: 'Successfully updated user',
+        });
+      } else {
+        ctx.applyFlashMessage({
+          status: 'error',
+          message: 'Username already exists',
+        });
+      }
     } catch (e) {
       ctx.applyFlashMessage({
         status: 'error',

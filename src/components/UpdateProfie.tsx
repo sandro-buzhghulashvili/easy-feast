@@ -49,7 +49,7 @@ const UpdateProfile: React.FC<{
             return (
               <img
                 className={`${
-                  avatar === image ? 'border-primary_orange' : undefined
+                  avatar === image ? classes.active : undefined
                 } rounded-full border-2 border-white_color mr-4 duration-300`}
                 key={avatar}
                 src={avatar}
