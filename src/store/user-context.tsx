@@ -1,7 +1,13 @@
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useState } from 'react';
 
-import User from "../models/User";
-import Flash from "../models/Flash";
+import User from '../models/User';
+import Flash from '../models/Flash';
+
+type AddressObject = {
+  location: string;
+  address: string;
+  zip: string;
+};
 
 type userContextObject = {
   user: User | undefined;
@@ -10,6 +16,7 @@ type userContextObject = {
   flashMessage: Flash | undefined;
   applyFlashMessage: (flashConfig: Flash) => void;
   removeFlashMessage: () => void;
+  saveAddress: (address: AddressObject) => void;
 };
 
 export const userContext = React.createContext<userContextObject>({
@@ -19,6 +26,7 @@ export const userContext = React.createContext<userContextObject>({
   flashMessage: undefined,
   applyFlashMessage: (flashConfig: Flash) => {},
   removeFlashMessage: () => {},
+  saveAddress: (address: AddressObject) => {},
 });
 
 const UserContextProvider: React.FC<{ children?: ReactNode }> = (props) => {
@@ -43,6 +51,16 @@ const UserContextProvider: React.FC<{ children?: ReactNode }> = (props) => {
     setFlashMessage(undefined);
   };
 
+  const saveAddressHandler = (address: AddressObject) => {
+    if (user) {
+      const updatedUser: User = {
+        ...user,
+        address: address,
+      };
+      setUser(updatedUser);
+    }
+  };
+
   const contextValue: userContextObject = {
     user,
     login: loginHandler,
@@ -50,6 +68,7 @@ const UserContextProvider: React.FC<{ children?: ReactNode }> = (props) => {
     flashMessage: flashMessage,
     applyFlashMessage: applyFlashHandler,
     removeFlashMessage: removeFlashHandler,
+    saveAddress: saveAddressHandler,
   };
 
   return (

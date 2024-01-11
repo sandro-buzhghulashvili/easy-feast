@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { userContext } from '../store/user-context';
 import { Bell, ChevronRight, Edit, Heart } from 'lucide-react';
 
@@ -11,14 +11,6 @@ import { useNavigate } from 'react-router-dom';
 const ProfileComponent: React.FC = () => {
   const navigate = useNavigate();
   const ctx = useContext(userContext);
-
-  if (!ctx.user) {
-    navigate('../');
-    ctx.applyFlashMessage({
-      status: 'error',
-      message: 'User is not logged in',
-    });
-  }
 
   const [uploadProfilePicture, setUploadProfilePicture] =
     useState<boolean>(false);
@@ -119,8 +111,18 @@ const ProfileComponent: React.FC = () => {
     });
   };
 
+  useEffect(() => {
+    if (!ctx.user) {
+      navigate('../');
+      ctx.applyFlashMessage({
+        status: 'error',
+        message: 'User is not logged in',
+      });
+    }
+  }, []);
+
   return (
-    <div className="container md:w-3/4 lg:w-1/2 mx-auto px-3">
+    <div className="container md:w-3/4 lg:w-1/2 mx-auto px-3 mt-40">
       {loading && <LoadingScreen />}
       <AnimatePresence>
         {uploadProfilePicture && (

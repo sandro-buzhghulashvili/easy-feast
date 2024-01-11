@@ -22,7 +22,7 @@ const Landing = () => {
       initial={{ opacity: 0, y: 200 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2, duration: 0.5 }}
-      className="flex flex-col-reverse lg:flex-row justify-between p-10 w-fit m-auto items-center container mb-44"
+      className="flex flex-col-reverse lg:flex-row justify-between p-10 w-fit m-auto items-center container mb-44 mt-40"
     >
       <section className={`${classes.hero} lg:w-3/5`}>
         <span

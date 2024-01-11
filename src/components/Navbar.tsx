@@ -4,11 +4,22 @@ import classes from './Navbar.module.scss';
 
 import { userContext } from '../store/user-context';
 
-import { Menu, List, X, User, LocateIcon, Contact, Home } from 'lucide-react';
+import {
+  Menu,
+  List,
+  X,
+  User,
+  LocateIcon,
+  Contact,
+  Home,
+  ShoppingCart,
+} from 'lucide-react';
 
 import { Link } from 'react-router-dom';
+import { cartContext } from '../store/cart-context';
 
 export default function Navbar() {
+  const cartCtx = useContext(cartContext);
   const ctx = useContext(userContext);
   const [toggleNavBar, setToggleNavbar] = useState<boolean>(false);
 
@@ -16,8 +27,14 @@ export default function Navbar() {
     setToggleNavbar((prevValue) => !prevValue);
   };
 
+  let totalCartItems = 0;
+
+  for (let i of cartCtx.cart) {
+    totalCartItems += i.quantity;
+  }
+
   return (
-    <div className="flex justify-between items-center py-8 px-8 sm:px-20 lg:px-56 mb-28">
+    <div className="fixed w-full z-10 top-0 left-0 bg-white_color flex justify-between items-center py-8 px-8 sm:px-20 lg:px-56 mb-28">
       <Link to="../" className={classes.logo}>
         EASY <span>FEAST</span>
       </Link>
@@ -32,12 +49,29 @@ export default function Navbar() {
           ></motion.div>
         )}
       </AnimatePresence>
-      <span
-        className={`${classes.menu} ${toggleNavBar ? classes.exit : undefined}`}
-        onClick={toggleNavbarHandler}
-      >
-        {toggleNavBar ? <X /> : <Menu />}
-      </span>
+      <div className="flex items-center">
+        <span className="mr-3 md:mr-6 lg:mr-10 relative cursor-pointer">
+          {totalCartItems !== 0 && (
+            <motion.span
+              key={totalCartItems}
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              className="absolute -top-4 -right-4 bg-primary_orange p-1 px-2 rounded-full"
+            >
+              {totalCartItems}
+            </motion.span>
+          )}
+          <ShoppingCart className="w-8 h-8" />
+        </span>
+        <span
+          className={`${classes.menu} ${
+            toggleNavBar ? classes.exit : undefined
+          }`}
+          onClick={toggleNavbarHandler}
+        >
+          {toggleNavBar ? <X /> : <Menu />}
+        </span>
+      </div>
       <ul
         className={`${classes['nav-links']} ${
           toggleNavBar ? classes.active : undefined
@@ -83,10 +117,10 @@ export default function Navbar() {
                 <User className="mr-5" /> My Profile
               </Link>
             </li>
-            <li>
-              <a href="#orders">
+            <li onClick={toggleNavbarHandler}>
+              <Link to="address">
                 <LocateIcon className="mr-5" /> Delivery Address
-              </a>
+              </Link>
             </li>
             <li>
               <a href="#orders">
