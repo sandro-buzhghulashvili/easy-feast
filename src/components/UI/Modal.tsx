@@ -28,7 +28,7 @@ const Modal: React.FC<{ onClose: () => void; children: ReactNode }> = ({
           hidden: { opacity: 0, y: '100%' },
           visible: { opacity: 1, y: 0 },
         }}
-        className="absolute h-fit w-3/4 md:w-1/2 lg:w-1/3 p-10 z-20 top-0 left-0 right-0 bottom-0 m-auto bg-light_orange"
+        className="absolute h-fit w-11/12 md:w-1/2 lg:w-1/3 p-10 px-5 z-20 top-0 left-0 right-0 bottom-0 m-auto bg-light_orange"
         onClick={(e) => e.stopPropagation()}
       >
         <span

@@ -28,8 +28,6 @@ const FoodPage: React.FC = () => {
   const filteredAddons =
     addons.filter((addon: Addon) => addon.type === foodData.type) || [];
 
-  console.log(cartCtx);
-
   const fetchAddons = async () => {
     setAddonLoader(true);
     try {
@@ -98,7 +96,6 @@ const FoodPage: React.FC = () => {
     }
   }, []);
 
-  console.log(foodData);
   return (
     <div className="lg:flex lg:justify-center mb-20 mt-40">
       <div className="px-5 w-11/12 sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 mx-auto lg:m-0">

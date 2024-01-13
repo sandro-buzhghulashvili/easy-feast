@@ -17,6 +17,8 @@ import {
 
 import { Link } from 'react-router-dom';
 import { cartContext } from '../store/cart-context';
+import Modal from './UI/Modal';
+import CartComponent from './CartComponent';
 
 export default function Navbar() {
   const cartCtx = useContext(cartContext);
@@ -25,6 +27,10 @@ export default function Navbar() {
 
   const toggleNavbarHandler = (): void => {
     setToggleNavbar((prevValue) => !prevValue);
+  };
+
+  const displayCartModal = () => {
+    cartCtx.displayCartFunc();
   };
 
   let totalCartItems = 0;
@@ -48,10 +54,18 @@ export default function Navbar() {
             exit={{ opacity: 0 }}
           ></motion.div>
         )}
+        {cartCtx.displayCart && (
+          <Modal onClose={cartCtx.displayCartFunc}>
+            <CartComponent />
+          </Modal>
+        )}
       </AnimatePresence>
       <div className="flex items-center">
-        <span className="mr-3 md:mr-6 lg:mr-10 relative cursor-pointer">
-          {totalCartItems !== 0 && (
+        {ctx.user && (
+          <span
+            className="mr-3 md:mr-6 lg:mr-10 relative cursor-pointer"
+            onClick={displayCartModal}
+          >
             <motion.span
               key={totalCartItems}
               initial={{ scale: 0.8 }}
@@ -60,9 +74,9 @@ export default function Navbar() {
             >
               {totalCartItems}
             </motion.span>
-          )}
-          <ShoppingCart className="w-8 h-8" />
-        </span>
+            <ShoppingCart className="w-8 h-8 md:hover:stroke-primary_orange duration-300" />
+          </span>
+        )}
         <span
           className={`${classes.menu} ${
             toggleNavBar ? classes.exit : undefined
