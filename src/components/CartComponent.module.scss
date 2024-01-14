@@ -1,0 +1,16 @@
+@import '../scss/variables';
+
+.cart {
+  padding-right: 20px;
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 20%;
+  }
+  &::-webkit-scrollbar-track {
+    background: #fff;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $primary-color-orange;
+    border-radius: 20px;
+  }
+}

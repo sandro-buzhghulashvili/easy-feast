@@ -1,10 +1,11 @@
 import React, { ReactNode, useState } from 'react';
+import { Addon } from '../pages/Food';
 
 export type CartItem = {
   id: string;
   title: string;
   price: string;
-  addOnTitle?: string;
+  addon?: Addon;
   address: any;
   quantity: number;
   date: string;

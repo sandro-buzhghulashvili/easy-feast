@@ -12,11 +12,13 @@ import arrowIcon from '../assets/arrow.png';
 import fireIcon from '../assets/noto_fire.png';
 import userEmoji from '../assets/user-emoji.png';
 import pizzaProfile from '../assets/pizza-profile.png';
+import { useNavigate } from 'react-router-dom';
 
 const Landing = () => {
   const { scrollY } = useScroll();
   const rotateClock = useTransform(scrollY, [0, 150, 300], [0, 90, 180]);
   const profilesOpacity = useTransform(scrollY, [0, 400, 600], [1, 0.7, 0.5]);
+  const navigate = useNavigate();
   return (
     <motion.main
       initial={{ opacity: 0, y: 200 }}
@@ -38,7 +40,10 @@ const Landing = () => {
           Our job is to filling your tummy with delicious food and with fast and
           free delivery
         </p>
-        <button className="px-10 py-4 bg-primary_orange rounded-full transition duration-300 mb-5">
+        <button
+          onClick={() => navigate('form?mode=signup')}
+          className="px-10 py-4 bg-primary_orange rounded-full transition duration-300 mb-5"
+        >
           Get Started
         </button>
         <button className="px-10 py-4 rounded-full transition duration-300">

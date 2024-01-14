@@ -5,7 +5,7 @@ import { Minus, Plus, ShoppingCart } from 'lucide-react';
 import { cartContext } from '../store/cart-context';
 import { userContext } from '../store/user-context';
 
-type Addon = {
+export type Addon = {
   id: string;
   img: string;
   price: number;
@@ -19,7 +19,7 @@ const FoodPage: React.FC = () => {
   const [selectedAddon, setSelectedAddon] = useState<undefined | string>(
     undefined
   );
-  const [addons, setAddons] = useState<Addon | any>([]);
+  const [addons, setAddons] = useState<Addon[] | any>([]);
   const [addonLoader, setAddonLoader] = useState<boolean>(false);
   const [addonError, setAddonError] = useState<string | boolean>(false);
   const [productQuantity, setProductQuantity] = useState<number>(1);
@@ -71,10 +71,14 @@ const FoodPage: React.FC = () => {
         return;
       }
       const orderitem = {
-        id: foodData.id,
+        id: selectedAddon
+          ? foodData.id + `/addon-${selectedAddon}`
+          : foodData.id,
         title: foodData.title,
         price: foodData.price,
-        addOnTitle: selectedAddon,
+        addon:
+          addons.filter((addon: Addon) => addon.id === selectedAddon)[0] ||
+          undefined,
         address: userCtx.user?.address,
         quantity: productQuantity,
         date: new Date().getDate().toString(),
