@@ -9,6 +9,8 @@ import UserContextProvider from './store/user-context';
 import CartContextProvider from './store/cart-context';
 import FoodPage, { loader as mealLoader } from './pages/Food';
 import AddressPage from './pages/Address';
+import OrdersPage from './pages/Orders';
+import AdminPanel from './pages/AdminPanel';
 
 const router = createBrowserRouter([
   {
@@ -37,7 +39,15 @@ const router = createBrowserRouter([
         path: 'address',
         element: <AddressPage />,
       },
+      {
+        path: 'orders',
+        element: <OrdersPage />,
+      },
     ],
+  },
+  {
+    path: '/admin',
+    element: <AdminPanel />,
   },
 ]);
 

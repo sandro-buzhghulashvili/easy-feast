@@ -122,9 +122,9 @@ export default function Navbar() {
           <>
             {' '}
             <li onClick={toggleNavbarHandler}>
-              <a href="#orders">
+              <Link to="orders">
                 <List className="mr-5" /> My Orders
-              </a>
+              </Link>
             </li>
             <li onClick={toggleNavbarHandler}>
               <Link to="profile">

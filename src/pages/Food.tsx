@@ -4,6 +4,7 @@ import Food from '../models/Food';
 import { Minus, Plus, ShoppingCart } from 'lucide-react';
 import { cartContext } from '../store/cart-context';
 import { userContext } from '../store/user-context';
+import { motion } from 'framer-motion';
 
 export type Addon = {
   id: string;
@@ -81,8 +82,9 @@ const FoodPage: React.FC = () => {
           undefined,
         address: userCtx.user?.address,
         quantity: productQuantity,
-        date: new Date().getDate().toString(),
+        date: new Date().toDateString(),
       };
+      setProductQuantity(1);
       cartCtx.addToCart(orderitem);
     } else {
       userCtx.applyFlashMessage({
@@ -101,7 +103,11 @@ const FoodPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="lg:flex lg:justify-center mb-20 mt-40">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="lg:flex lg:justify-center mb-20 mt-40"
+    >
       <div className="px-5 w-11/12 sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 mx-auto lg:m-0">
         <img
           className="mb-5 rounded-xl h-64 lg:h-72 w-full"
@@ -185,7 +191,7 @@ const FoodPage: React.FC = () => {
       ) : (
         <h1>{addonError}</h1>
       )}
-    </div>
+    </motion.div>
   );
 };
 

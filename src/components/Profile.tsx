@@ -3,7 +3,7 @@ import { userContext } from '../store/user-context';
 import { Bell, ChevronRight, Edit, Heart } from 'lucide-react';
 
 import Modal from './UI/Modal';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import UpdateProfile from './UpdateProfie';
 import LoadingScreen from './UI/LoadingScreen';
 import { useNavigate } from 'react-router-dom';
@@ -122,7 +122,11 @@ const ProfileComponent: React.FC = () => {
   }, []);
 
   return (
-    <div className="container md:w-3/4 lg:w-1/2 mx-auto px-3 mt-40">
+    <motion.div
+      initial={{ opacity: 0, y: 300 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="container md:w-3/4 lg:w-1/2 mx-auto px-3 mt-40"
+    >
       {loading && <LoadingScreen />}
       <AnimatePresence>
         {uploadProfilePicture && (
@@ -175,7 +179,7 @@ const ProfileComponent: React.FC = () => {
       >
         Logout
       </button>
-    </div>
+    </motion.div>
   );
 };
 

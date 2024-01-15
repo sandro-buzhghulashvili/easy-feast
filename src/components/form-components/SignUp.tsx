@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import useInput from '../../hooks/use-input';
 import User from '../../models/User';
+import { motion } from 'framer-motion';
 
 const SignUp: React.FC<{ onFormSubmit: (userConfig: User) => void }> = ({
   onFormSubmit,
@@ -44,13 +45,19 @@ const SignUp: React.FC<{ onFormSubmit: (userConfig: User) => void }> = ({
   };
 
   useEffect(() => {
+    window.scroll({
+      top: 0,
+      behavior: 'smooth',
+    });
     if (usernameIsValid && passwordIsValid && emailIsValid)
       setFormIsValid(true);
     else setFormIsValid(false);
   }, [usernameIsValid, passwordIsValid, emailIsValid]);
 
   return (
-    <form
+    <motion.form
+      initial={{ opacity: 0, y: 300 }}
+      animate={{ opacity: 1, y: 0 }}
       onSubmit={submitHandler}
       className="container mx-auto p-10 md:px-52 mb-28 mt-40"
     >
@@ -107,7 +114,7 @@ const SignUp: React.FC<{ onFormSubmit: (userConfig: User) => void }> = ({
       >
         Sign up
       </button>
-    </form>
+    </motion.form>
   );
 };
 

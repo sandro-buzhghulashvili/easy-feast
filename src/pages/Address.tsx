@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import classes from './Address.module.scss';
 import { userContext } from '../store/user-context';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 type AddressObject = {
   location: string;
@@ -107,7 +108,9 @@ export default function AddressPage() {
   }, []);
 
   return (
-    <form
+    <motion.form
+      initial={{ opacity: 0, y: 300 }}
+      animate={{ opacity: 1, y: 0 }}
       className={`${classes.form} px-10 mb-10 sm:px-20 md:w-1/2 md:mx-auto lg:w-5/12 mt-40`}
       onSubmit={submitHandler}
     >
@@ -141,6 +144,6 @@ export default function AddressPage() {
       <button className="mt-2 px-7 py-3 text-lg bg-primary_orange text-white_color rounded-lg">
         Save
       </button>
-    </form>
+    </motion.form>
   );
 }

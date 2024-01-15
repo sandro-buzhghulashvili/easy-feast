@@ -1,6 +1,6 @@
 import React, { ReactNode, useState } from 'react';
 
-import User from '../models/User';
+import User, { OrderObject } from '../models/User';
 import Flash from '../models/Flash';
 
 type AddressObject = {
@@ -17,6 +17,8 @@ type userContextObject = {
   applyFlashMessage: (flashConfig: Flash) => void;
   removeFlashMessage: () => void;
   saveAddress: (address: AddressObject) => void;
+  addOrder: (order: OrderObject) => void;
+  removeOrder: (orderId: string) => void;
 };
 
 export const userContext = React.createContext<userContextObject>({
@@ -27,6 +29,8 @@ export const userContext = React.createContext<userContextObject>({
   applyFlashMessage: (flashConfig: Flash) => {},
   removeFlashMessage: () => {},
   saveAddress: (address: AddressObject) => {},
+  addOrder: (order: OrderObject) => {},
+  removeOrder: (orderId: string) => {},
 });
 
 const UserContextProvider: React.FC<{ children?: ReactNode }> = (props) => {
@@ -61,6 +65,29 @@ const UserContextProvider: React.FC<{ children?: ReactNode }> = (props) => {
     }
   };
 
+  const addOrderHandler = (order: OrderObject) => {
+    if (user) {
+      const updatedUser: User = {
+        ...user,
+        orders: user.orders ? [...user.orders, order] : [order],
+      };
+
+      setUser(updatedUser);
+    }
+  };
+
+  const removeOrderHandler = (orderId: string) => {
+    if (user) {
+      const updatedOrders = user.orders?.filter(
+        (order) => order.id !== orderId
+      );
+      setUser({
+        ...user,
+        orders: updatedOrders,
+      });
+    }
+  };
+
   const contextValue: userContextObject = {
     user,
     login: loginHandler,
@@ -69,6 +96,8 @@ const UserContextProvider: React.FC<{ children?: ReactNode }> = (props) => {
     applyFlashMessage: applyFlashHandler,
     removeFlashMessage: removeFlashHandler,
     saveAddress: saveAddressHandler,
+    addOrder: addOrderHandler,
+    removeOrder: removeOrderHandler,
   };
 
   return (

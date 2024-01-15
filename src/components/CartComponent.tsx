@@ -1,12 +1,76 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { cartContext } from '../store/cart-context';
 import { Minus, Plus } from 'lucide-react';
 
 import classes from './CartComponent.module.scss';
+import { userContext } from '../store/user-context';
+import { OrderObject } from '../models/User';
+import { useNavigate } from 'react-router-dom';
 
 const CartComponent: React.FC = () => {
   const cartCtx = useContext(cartContext);
+  const userCtx = useContext(userContext);
+  const navigate = useNavigate();
   let orderPrice = 0;
+
+  const addOrdersToDatabase = async () => {
+    try {
+      const res = await fetch(
+        'https://easy-feast-default-rtdb.firebaseio.com/users.json'
+      );
+      const userEntries = Object.entries(await res.json());
+      const user = userEntries.find(([id, user]: [id: any, user: any]) => {
+        if (userCtx.user) {
+          if (user.id === userCtx.user.id) {
+            return id;
+          }
+        }
+      });
+      let userId: undefined | string = undefined;
+      if (user) userId = user[0];
+
+      if (res.ok) {
+        fetch(
+          'https://easy-feast-default-rtdb.firebaseio.com/users/' +
+            userId +
+            '.json',
+          {
+            method: 'PATCH',
+            body: JSON.stringify({
+              orders: userCtx.user?.orders,
+            }),
+          }
+        );
+      }
+    } catch {
+      userCtx.applyFlashMessage({
+        status: 'error',
+        message: 'Failed to order',
+      });
+    }
+  };
+  console.log(userCtx);
+  const handleOrder = () => {
+    const orderObj: OrderObject = {
+      id: new Date().toISOString(),
+      foods: cartCtx.cart,
+      date: new Date().toDateString(),
+      price: orderPrice,
+      location: userCtx.user?.address,
+    };
+    userCtx.addOrder(orderObj);
+    cartCtx.clearCart();
+    cartCtx.displayCartFunc();
+    navigate('/orders');
+    userCtx.applyFlashMessage({
+      status: 'success',
+      message: 'Successfully ordered!',
+    });
+  };
+
+  useEffect(() => {
+    addOrdersToDatabase();
+  }, [userCtx.user?.orders]);
   return (
     <>
       {cartCtx.cart.length === 0 ? (
@@ -16,7 +80,7 @@ const CartComponent: React.FC = () => {
       ) : (
         <>
           <div
-            className={`flex flex-col h-52 mb-10 overflow-y-auto ${classes.cart}`}
+            className={`flex flex-col max-h-52 mb-10 overflow-y-auto ${classes.cart}`}
           >
             {cartCtx.cart.map((cartItem) => {
               let totalPrice = cartItem.quantity * Number(cartItem.price);
@@ -63,7 +127,12 @@ const CartComponent: React.FC = () => {
           <h1 className="text-xl font-bold mb-5">
             Total : ${orderPrice.toFixed(2)}
           </h1>
-          <button>Order</button>
+          <button
+            onClick={handleOrder}
+            className="px-5 py-2 bg-primary_orange text-white_color rounded-full font-bold md:hover:scale-110 duration-300"
+          >
+            Order
+          </button>
         </>
       )}
     </>
