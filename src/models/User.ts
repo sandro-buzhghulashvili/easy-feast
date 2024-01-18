@@ -22,6 +22,7 @@ class User {
   img?: string;
   address?: AddressObject | undefined;
   orders?: OrderObject[] | undefined;
+  admin?: false;
 
   constructor(
     username: string,

@@ -10,7 +10,7 @@ import CartContextProvider from './store/cart-context';
 import FoodPage, { loader as mealLoader } from './pages/Food';
 import AddressPage from './pages/Address';
 import OrdersPage from './pages/Orders';
-import AdminPanel from './pages/AdminPanel';
+import AdminPanel, { loader as adminDataLoader } from './pages/AdminPanel';
 
 const router = createBrowserRouter([
   {
@@ -48,6 +48,7 @@ const router = createBrowserRouter([
   {
     path: '/admin',
     element: <AdminPanel />,
+    loader: adminDataLoader,
   },
 ]);
 
