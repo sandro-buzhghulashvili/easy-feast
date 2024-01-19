@@ -5,13 +5,15 @@ class Food {
   price: string;
   img: string;
   description?: string;
+  typeIcon?: string;
   constructor(
     foodTitle: string,
     foodType: string,
     foodPrice: string,
     foodImg: string,
     foodId: string = new Date().toISOString(),
-    description: string
+    description: string,
+    typeIcon: string
   ) {
     this.id = foodId;
     this.title = foodTitle;
@@ -19,6 +21,7 @@ class Food {
     this.price = foodPrice;
     this.img = foodImg;
     this.description = description;
+    this.typeIcon = typeIcon;
   }
 }
 

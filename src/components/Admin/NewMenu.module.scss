@@ -1,0 +1,29 @@
+@import "../../scss/variables";
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+
+  &.invalid {
+    input {
+      border-bottom: 3px solid red;
+    }
+  }
+
+  label {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  input {
+    background-color: $gray-color;
+    border-bottom: 2px solid $primary-color-orange;
+    font-size: 18px;
+    padding: 6px 12px;
+    transition: 0.5s;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

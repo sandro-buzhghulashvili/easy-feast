@@ -1,20 +1,26 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import LayoutPage from './pages/Layout';
-import LandingPage, { loader as foodLoader } from './pages/Landing';
-import FormPage from './pages/Form';
-import ProfilePage from './pages/Profile';
+import LayoutPage from "./pages/Layout";
+import LandingPage, { loader as foodLoader } from "./pages/Landing";
+import FormPage from "./pages/Form";
+import ProfilePage from "./pages/Profile";
 
-import UserContextProvider from './store/user-context';
-import CartContextProvider from './store/cart-context';
-import FoodPage, { loader as mealLoader } from './pages/Food';
-import AddressPage from './pages/Address';
-import OrdersPage from './pages/Orders';
-import AdminPanel, { loader as adminDataLoader } from './pages/AdminPanel';
+import UserContextProvider from "./store/user-context";
+import CartContextProvider from "./store/cart-context";
+import FoodPage, { loader as mealLoader } from "./pages/Food";
+import AddressPage from "./pages/Address";
+import OrdersPage from "./pages/Orders";
+import AdminPanel, {
+  loader as adminDataLoader,
+  action as deleteAction,
+} from "./pages/AdminPanel";
+import NewMenu, { action as menuAction } from "./components/Admin/NewMenu";
+import AdminLayoutPage from "./pages/AdminLayout";
+import NewAddon, { action as addonAction } from "./components/Admin/NewAddon";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <LayoutPage />,
     children: [
       {
@@ -23,32 +29,49 @@ const router = createBrowserRouter([
         loader: foodLoader,
       },
       {
-        path: ':id',
+        path: ":id",
         element: <FoodPage />,
         loader: mealLoader,
       },
       {
-        path: 'form',
+        path: "form",
         element: <FormPage />,
       },
       {
-        path: 'profile',
+        path: "profile",
         element: <ProfilePage />,
       },
       {
-        path: 'address',
+        path: "address",
         element: <AddressPage />,
       },
       {
-        path: 'orders',
+        path: "orders",
         element: <OrdersPage />,
       },
     ],
   },
   {
-    path: '/admin',
-    element: <AdminPanel />,
-    loader: adminDataLoader,
+    path: "/admin",
+    element: <AdminLayoutPage />,
+    children: [
+      {
+        index: true,
+        element: <AdminPanel />,
+        loader: adminDataLoader,
+        action: deleteAction,
+      },
+      {
+        path: "new-menu",
+        element: <NewMenu />,
+        action: menuAction,
+      },
+      {
+        path: "new-addon",
+        element: <NewAddon />,
+        action: addonAction,
+      },
+    ],
   },
 ]);
 

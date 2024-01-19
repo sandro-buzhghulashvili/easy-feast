@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
-import AdminNavbar from './Navbar';
-import { userContext } from '../../store/user-context';
-import Dashboard from './Dashboard';
-import OrderChart from './Chart';
-import Menus from './Menus';
+import React from "react";
+import Dashboard from "./Dashboard";
+import OrderChart from "./Chart";
+import Menus from "./Menus";
+import Orders from "./Orders";
 
 interface OrderEntry {
   month: string;
@@ -15,9 +14,9 @@ const AdminComponent: React.FC<{
   usersData: any;
   menuData: any;
   orders: any;
-}> = ({ usersData, menuData, orders }) => {
+  addons: any;
+}> = ({ usersData, menuData, orders, addons }) => {
   const orderData = Object.values(orders)[0] as OrderEntry[];
-  const userCtx = useContext(userContext);
 
   const totalRevenue: number = orderData.reduce((a, b: any) => {
     return a + b.monthlyRevenue;
@@ -25,14 +24,14 @@ const AdminComponent: React.FC<{
 
   return (
     <div>
-      <AdminNavbar userData={userCtx.user} />
       <Dashboard
         usersData={usersData}
         menuData={menuData}
         totalRevenue={Math.round(totalRevenue / 1000)}
       />
       <OrderChart orderData={orderData} />
-      <Menus menu={Object.values(menuData)} />
+      <Menus menu={Object.values(menuData)} addons={Object.values(addons)} />
+      <Orders users={usersData} />
     </div>
   );
 };
