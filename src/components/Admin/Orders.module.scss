@@ -1,0 +1,15 @@
+@import '../../scss/variables';
+
+.orders {
+  &::-webkit-scrollbar {
+    width: 20px;
+    height: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #fff;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $primary-color-orange;
+    border-radius: 20px;
+  }
+}

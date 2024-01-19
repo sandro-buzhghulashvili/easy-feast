@@ -1,8 +1,8 @@
-import React from "react";
-import Dashboard from "./Dashboard";
-import OrderChart from "./Chart";
-import Menus from "./Menus";
-import Orders from "./Orders";
+import React from 'react';
+import Dashboard from './Dashboard';
+import OrderChart from './Chart';
+import Menus from './Menus';
+import Orders from './Orders';
 
 interface OrderEntry {
   month: string;
@@ -32,6 +32,9 @@ const AdminComponent: React.FC<{
       <OrderChart orderData={orderData} />
       <Menus menu={Object.values(menuData)} addons={Object.values(addons)} />
       <Orders users={usersData} />
+      <button className="mx-auto mb-10 font-bold block px-7 py-2 text-xl bg-primary_orange text-white rounded-xl md:hover:scale-110 duration-300">
+        Logout
+      </button>
     </div>
   );
 };

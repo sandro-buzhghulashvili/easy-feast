@@ -136,11 +136,6 @@ export default function Navbar() {
                 <LocateIcon className="mr-5" /> Delivery Address
               </Link>
             </li>
-            <li>
-              <a href="#orders">
-                <List className="mr-5" /> My Orders
-              </a>
-            </li>{' '}
           </>
         ) : (
           <>
