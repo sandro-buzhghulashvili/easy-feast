@@ -1,7 +1,7 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useState } from "react";
 
-import User, { OrderObject } from '../models/User';
-import Flash from '../models/Flash';
+import User, { OrderObject } from "../models/User";
+import Flash from "../models/Flash";
 
 type AddressObject = {
   location: string;
@@ -23,14 +23,14 @@ type userContextObject = {
 
 export const userContext = React.createContext<userContextObject>({
   user: undefined,
-  login: (userObj: User) => {},
+  login: () => {},
   logout: () => {},
   flashMessage: undefined,
-  applyFlashMessage: (flashConfig: Flash) => {},
+  applyFlashMessage: () => {},
   removeFlashMessage: () => {},
-  saveAddress: (address: AddressObject) => {},
-  addOrder: (order: OrderObject) => {},
-  removeOrder: (orderId: string) => {},
+  saveAddress: () => {},
+  addOrder: () => {},
+  removeOrder: () => {},
 });
 
 const UserContextProvider: React.FC<{ children?: ReactNode }> = (props) => {

@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react';
-import User from '../../models/User';
+import React, { useContext, useState } from "react";
+import User from "../../models/User";
 
-import classes from './Orders.module.scss';
-import { userContext } from '../../store/user-context';
-import { useNavigate } from 'react-router-dom';
-import LoadingScreen from '../UI/LoadingScreen';
+import classes from "./Orders.module.scss";
+import { userContext } from "../../store/user-context";
+import { useNavigate } from "react-router-dom";
+import LoadingScreen from "../UI/LoadingScreen";
 
 const Orders: React.FC<{ users: any }> = ({ users }) => {
   const [loading, setLoading] = useState(false);
@@ -30,12 +30,12 @@ const Orders: React.FC<{ users: any }> = ({ users }) => {
   ]) => {
     try {
       const res = await fetch(
-        'https://easy-feast-default-rtdb.firebaseio.com/orderDynamics/-NoJ09XhC7GxvAv1IocK.json'
+        "https://easy-feast-default-rtdb.firebaseio.com/orderDynamics/-NoJ09XhC7GxvAv1IocK.json"
       );
       const orderDynamics = await res.json();
       let updatedDynamics = orderDynamics.slice();
-      const currentMonth = new Date().toLocaleString('en-US', {
-        month: 'long',
+      const currentMonth = new Date().toLocaleString("en-US", {
+        month: "long",
       });
       const monthExists = orderDynamics.find(
         (stat: any) => stat.month === currentMonth
@@ -65,16 +65,16 @@ const Orders: React.FC<{ users: any }> = ({ users }) => {
       }
 
       fetch(
-        'https://easy-feast-default-rtdb.firebaseio.com/orderDynamics/-NoJ09XhC7GxvAv1IocK.json',
+        "https://easy-feast-default-rtdb.firebaseio.com/orderDynamics/-NoJ09XhC7GxvAv1IocK.json",
         {
-          method: 'PUT',
+          method: "PUT",
           body: JSON.stringify(updatedDynamics),
         }
       );
     } catch {
       ctx.applyFlashMessage({
-        status: 'error',
-        message: 'Could not update order dynamics',
+        status: "error",
+        message: "Could not update order dynamics",
       });
     }
   };
@@ -83,7 +83,7 @@ const Orders: React.FC<{ users: any }> = ({ users }) => {
     setLoading(true);
     try {
       const usersData = Object.entries(users).filter(
-        ([id, user]: [id: string, user: any]) => user.orders
+        ([_, user]: [id: string, user: any]) => user.orders
       );
       const currentUser: any = usersData.find(
         ([id, user]: [id: string, user: any]) => {
@@ -102,13 +102,13 @@ const Orders: React.FC<{ users: any }> = ({ users }) => {
       );
 
       const res = await fetch(
-        'https://easy-feast-default-rtdb.firebaseio.com/users/' +
+        "https://easy-feast-default-rtdb.firebaseio.com/users/" +
           currentUserId +
-          '.json',
+          ".json",
         {
-          method: 'PATCH',
+          method: "PATCH",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             orders: updatedOrders,
@@ -119,29 +119,29 @@ const Orders: React.FC<{ users: any }> = ({ users }) => {
       if (!res.ok) {
         setLoading(false);
         ctx.applyFlashMessage({
-          status: 'error',
-          message: 'Could not confirm order',
+          status: "error",
+          message: "Could not confirm order",
         });
       } else {
         setLoading(false);
         ctx.applyFlashMessage({
-          status: 'success',
-          message: 'Successfully confirmed delivery',
+          status: "success",
+          message: "Successfully confirmed delivery",
         });
-        navigate('/');
+        navigate("/");
       }
     } catch {
       setLoading(false);
       ctx.applyFlashMessage({
-        status: 'error',
-        message: 'Could not confirm order',
+        status: "error",
+        message: "Could not confirm order",
       });
     }
   };
   return (
-    <div className="container mx-auto mb-28">
+    <div className='container mx-auto mb-28'>
       {loading && <LoadingScreen />}
-      <h1 className="text-2xl font-bold text-center mb-10">Incoming Orders:</h1>
+      <h1 className='text-2xl font-bold text-center mb-10'>Incoming Orders:</h1>
       <div
         className={`whitespace-nowrap lg:whitespace-normal lg:text-center overflow-x-auto pb-5 ${classes.orders}`}
       >
@@ -149,19 +149,19 @@ const Orders: React.FC<{ users: any }> = ({ users }) => {
           orders.map(({ username, order }) => {
             return (
               <div
-                className="p-10 h-full m-5 border-2 rounded-xl border-primary_orange w-fit inline-block"
+                className='p-10 h-full m-5 border-2 rounded-xl border-primary_orange w-fit inline-block'
                 key={order.id}
               >
-                <h1 className="mb-5 text-xl font-bold text-primary_orange pb-2 border-b-2 border-primary_orange">
+                <h1 className='mb-5 text-xl font-bold text-primary_orange pb-2 border-b-2 border-primary_orange'>
                   From : {username}
                 </h1>
                 {order.foods.map((food: any) => {
                   return (
                     <div
                       key={food.id}
-                      className="mb-2 pb-1 border-b-2 border-typography_color"
+                      className='mb-2 pb-1 border-b-2 border-typography_color'
                     >
-                      <h1 className="text-xl font-bold mb-1">
+                      <h1 className='text-xl font-bold mb-1'>
                         {food.title} x{food.quantity}
                       </h1>
                       {food.addon && (
@@ -172,20 +172,20 @@ const Orders: React.FC<{ users: any }> = ({ users }) => {
                     </div>
                   );
                 })}
-                <h1 className="text-xl font-bold text-primary_orange">
+                <h1 className='text-xl font-bold text-primary_orange'>
                   ${order.price.toFixed(2)}
                 </h1>
                 {order.location && (
-                  <h1 className="text-lg text-gray_color font-bold">
+                  <h1 className='text-lg text-gray_color font-bold'>
                     {order.location.location}, {order.location.address}
                   </h1>
                 )}
-                <h1 className="font-bold mb-5 text-primary_yellow">
+                <h1 className='font-bold mb-5 text-primary_yellow'>
                   {order.date}
                 </h1>
                 <button
                   onClick={() => confirmOrderDelivery(order.id)}
-                  className="px-5 py-2 bg-green-700 text-white_color rounded-xl cursor-pointer md:hover:scale-110 duration-300"
+                  className='px-5 py-2 bg-green-700 text-white_color rounded-xl cursor-pointer md:hover:scale-110 duration-300'
                 >
                   Confirm Delivery
                 </button>
@@ -193,7 +193,7 @@ const Orders: React.FC<{ users: any }> = ({ users }) => {
             );
           })
         ) : (
-          <h1 className="text-xl text-center">Nobody ordered anything yet!</h1>
+          <h1 className='text-xl text-center'>Nobody ordered anything yet!</h1>
         )}
       </div>
     </div>
