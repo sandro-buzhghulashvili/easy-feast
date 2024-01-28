@@ -51,3 +51,10 @@
   - Firebase Realtime Database for data storage
   - Firebase Authentication for user management
 
+## Admin Panel Login
+
+To access the admin panel, use the following credentials:
+
+- **Username:** admin
+- **Password:** admin5
+
