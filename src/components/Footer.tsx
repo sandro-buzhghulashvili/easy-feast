@@ -7,7 +7,7 @@ import { Instagram, Facebook, Twitter, Send } from 'lucide-react';
 const Footer: React.FC = () => {
   return (
     <div
-      className={`${classes.container} absolute bottom-0 mx-auto p-10 py-20 flex justify-center flex-wrap bg-light_orange`}
+      className={`${classes.container} md:absolute bottom-0 mx-auto p-10 py-20 flex justify-center flex-wrap bg-light_orange`}
     >
       <div className={classes['footer-section']}>
         <h1>EASY FEAST</h1>

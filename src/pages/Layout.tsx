@@ -25,7 +25,7 @@ export default function LayoutPage() {
 
   return (
     <>
-      <div className="min-h-screen relative pb-96">
+      <div className="min-h-screen relative md:pb-96">
         {navigation.state === 'loading' && <LoadingScreen />}
         <AnimatePresence>
           {ctx.flashMessage && (
