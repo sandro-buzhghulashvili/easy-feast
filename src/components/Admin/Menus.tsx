@@ -117,7 +117,7 @@ const Menus: React.FC<{ menu: any; addons: any }> = ({ menu, addons }) => {
                       {food.price}
                     </span>
                     <img
-                      className="rounded-xl h-48 w-full"
+                      className="rounded-xl h-64 w-full"
                       src={food.img}
                       alt="food thumbnail"
                     />
