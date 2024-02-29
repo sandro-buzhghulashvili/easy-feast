@@ -25,19 +25,21 @@ export default function LayoutPage() {
 
   return (
     <>
-      {navigation.state === 'loading' && <LoadingScreen />}
-      <AnimatePresence>
-        {ctx.flashMessage && (
-          <FlashMessage
-            success={ctx.flashMessage.status === 'success' ? true : false}
-            message={ctx.flashMessage.message}
-            onClose={closeFlashMessageHandler}
-          />
-        )}
-      </AnimatePresence>
-      <Navbar />
-      <Outlet />
-      <Footer />
+      <div className="min-h-screen relative pb-96">
+        {navigation.state === 'loading' && <LoadingScreen />}
+        <AnimatePresence>
+          {ctx.flashMessage && (
+            <FlashMessage
+              success={ctx.flashMessage.status === 'success' ? true : false}
+              message={ctx.flashMessage.message}
+              onClose={closeFlashMessageHandler}
+            />
+          )}
+        </AnimatePresence>
+        <Navbar />
+        <Outlet />
+        <Footer />
+      </div>
     </>
   );
 }

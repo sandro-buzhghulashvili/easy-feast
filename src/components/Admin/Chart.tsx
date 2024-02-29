@@ -7,6 +7,7 @@ interface OrderChartProps {
 }
 
 const OrderChart: React.FC<OrderChartProps> = ({ orderData }) => {
+  console.log(orderData);
   const chartRef = useRef<HTMLCanvasElement | null>(null);
   const chartInstance = useRef<Chart | null>(null);
 
