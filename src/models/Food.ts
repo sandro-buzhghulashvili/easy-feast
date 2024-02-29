@@ -6,6 +6,8 @@ class Food {
   img: string;
   description?: string;
   typeIcon?: string;
+  ratings?: any[];
+  comments?: any[];
   constructor(
     foodTitle: string,
     foodType: string,
