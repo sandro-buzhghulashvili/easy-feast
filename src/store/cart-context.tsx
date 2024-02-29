@@ -1,5 +1,5 @@
-import React, { ReactNode, useState } from 'react';
-import { Addon } from '../pages/Food';
+import React, { ReactNode, useState } from "react";
+import { Addon } from "../pages/Food";
 
 export type CartItem = {
   id: string;
@@ -22,10 +22,10 @@ type CartContextType = {
 
 export const cartContext = React.createContext<CartContextType>({
   cart: [] as CartItem[],
-  addToCart: (cartItem: CartItem) => {},
+  addToCart: () => {},
   displayCart: false,
   displayCartFunc: () => {},
-  removeFromCart: (id: string) => {},
+  removeFromCart: () => {},
   clearCart: () => {},
 });
 

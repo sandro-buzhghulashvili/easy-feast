@@ -1,30 +1,60 @@
-# React + TypeScript + Vite
+# Easy Feast - B2C Food Ordering Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+**Easy Feast** is a dynamic web application that replicates a B2C (Business-to-Consumer) food ordering system. This platform empowers users to effortlessly place orders for various culinary delights, complete with optional addons for specific items, all with the convenience of delivery to a specified address. The application also comes equipped with robust administrative features, allowing administrators to confirm orders, manage menus and addons, and monitor vital business metrics.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+### User-Facing Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. **Ordering System**
+   - Users can browse through different types of foods and place orders.
+   - Optional addons are available for certain food items to enhance the user experience.
 
-- Configure the top-level `parserOptions` property like this:
+2. **Address Management**
+   - Users can input and manage delivery addresses for a seamless ordering process.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+3. **User Authentication**
+   - Secure user authentication and authorization system.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+4. **Real-time Updates**
+   - Users receive real-time updates on the status of their orders.
+
+### Administrator Features
+
+1. **Order Management**
+   - Administrators can confirm orders as delivered, updating the order status.
+
+2. **Menu and Addon Management**
+   - Admins can add, update, or remove menus and addons to keep the offerings current.
+
+3. **Business Analytics**
+   - Track key business metrics:
+     - Orders per month
+     - Total clients
+     - Total orders
+     - Total revenue
+
+## Technology Stack
+
+- **Frontend:**
+  - React/Typescript
+  - React Router with loaders and actions
+  - React Context and Redux for state management
+  - Tailwind CSS for styling
+  - SCSS for additional styling enhancements
+  - Framer Motion for smooth animations
+  - ChartJS for statistics
+
+- **Backend:**
+  - Firebase Realtime Database for data storage
+  - Firebase Authentication for user management
+
+## Admin Panel Login
+
+To access the admin panel, use the following credentials:
+
+- **Username:** admin
+- **Password:** admin5
+
